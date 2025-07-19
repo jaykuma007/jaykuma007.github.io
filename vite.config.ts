@@ -3,9 +3,14 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
+// https://vitejs.dev/config/
 export default defineConfig({
-  // This 'base' path should match your repository name on GitHub
-  base: '/jayk/', // <--- ADD OR MODIFY THIS LINE
   plugins: [react()],
-  // Any other configurations you might have can stay here
+  server: {
+    // This is the key part. We are configuring the development server's headers.
+    headers: {
+      // We set a Content-Security-Policy to explicitly allow credly.com as a frame source.
+      'Content-Security-Policy': "frame-src 'self' https://www.credly.com;"
+    }
+  }
 });
